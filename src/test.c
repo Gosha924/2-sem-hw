@@ -2,6 +2,6 @@
 
 int main()
 {
-  fmt.printf("test");
+  printf("test");
   return 0;
   }
