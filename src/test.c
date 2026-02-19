@@ -1,10 +1,12 @@
 #include <stdio.h>
 
-void printNum(int num) {
+void printNum(int num)
+{
     printf("num is %d\n", num);
 }
 
-int main(void){ 
+int main(void)
+{
     printf("test\n");
     printf("test2\n");
     printNum(21);
