@@ -7,13 +7,13 @@ typedef struct QueueNode {
 } QueueNode;
 
 typedef struct Heap {
-    QueueNode *data;
+    QueueNode* data;
     int size;
     int capacity;
 } Heap;
 
-void heapInit(Heap *heap, int capacity);
-void swap(QueueNode *a, QueueNode *b);
+void heapInit(Heap* heap, int capacity);
+void swap(QueueNode* a, QueueNode* b);
 void heapPush(Heap* heap, int dist, int city, int state);
 void heapUp(Heap* heap, int idx);
 void heapDown(Heap* heap, int idx);
