@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 int* calculateColumnWidths(char** strings, int numStrings, int numCols);
-bool isNumber(char* str, double* result);
+bool isNumber(const char* str, double* result);
 int isDelimiter(char c);
 int countColumns(char** data, int linesRead);
-void printHorizontalLine(FILE* output, int* widths, int cols, char c);
+void printHorizontalLine(FILE* output, const int* widths, int cols, char c);
 char** splitLine(char* line, int numCols);
 void freeWords(char** words, int numCols);
-void printRow(FILE* output, char** words, int* widths, int numCols, int isHeader);
+void printRow(FILE* output, char** words, const int* widths, int numCols, int isHeader);

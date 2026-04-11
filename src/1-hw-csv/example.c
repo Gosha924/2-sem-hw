@@ -39,12 +39,23 @@ int main(void)
         }
 
         data[linesRead] = malloc(strlen(buffer) + 1);
-        strcpy(data[linesRead], buffer);
+        if (data[linesRead] == NULL) {
+            printf("Memory allocation for line failed\n");
+            // очистка ранее выделенной памяти
+            for (int i = 0; i < linesRead; i++) {
+                free(data[i]);
+            }
+            free(data);
+            fclose(file);
+            return 1;
+        }
+        strncpy(data[linesRead], buffer, strlen(buffer) + 1);
+        data[linesRead][strlen(buffer)] = '\0';
         linesRead++;
     }
     fclose(file);
 
-    FILE* output = fopen("out.txt", "w");
+    FILE* output = fopen("output.txt", "w");
     if (output == NULL) {
         printf("output file is not found\n");
         for (int i = 0; i < linesRead; i++) {
