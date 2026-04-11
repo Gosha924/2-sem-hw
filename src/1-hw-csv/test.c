@@ -163,13 +163,13 @@ void testIntegration(void)
 {
     printf("Integration test...\n");
 
-    FILE* test_input = fopen("testInput.csv", "w");
-    assert(test_input != NULL);
-    fprintf(test_input, "Name,Age,Salary,City\n");
-    fprintf(test_input, "Gosha,25,55555,New York\n");
-    fprintf(test_input, "Karim Benzema,30,222222,London\n");
-    fprintf(test_input, "Lev,35,22222,Paris\n");
-    fclose(test_input);
+    FILE* testInput = fopen("testInput.csv", "w");
+    assert(testInput != NULL);
+    fprintf(testInput, "Name,Age,Salary,City\n");
+    fprintf(testInput, "Gosha,25,55555,New York\n");
+    fprintf(testInput, "Karim Benzema,30,222222,London\n");
+    fprintf(testInput, "Lev,35,22222,Paris\n");
+    fclose(testInput);
 
     FILE* file = fopen("testInput.csv", "r");
     assert(file != NULL);
