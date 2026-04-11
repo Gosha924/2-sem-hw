@@ -19,12 +19,19 @@ int max(int a, int b)
 avlNode* createNewNode(const char* iata, const char* name)
 {
     avlNode* newNode = (avlNode*)malloc(sizeof(avlNode));
+    if (newNode == NULL) {
+        return NULL;
+    }
     strncpy(newNode->iata, iata, 3);
     newNode->iata[3] = '\0';
 
     newNode->name = (char*)malloc(strlen(name) + 1);
-    strcpy(newNode->name, name);
-
+    if (!newNode->name) {
+        free(newNode);
+        return NULL;
+    }
+    strncpy(newNode->name, name, strlen(name) + 1);
+    newNode->name[strlen(name)] = '\0';
     newNode->left = NULL;
     newNode->right = NULL;
     newNode->height = 1;
@@ -200,16 +207,19 @@ avlNode* deleteNode(avlNode* node, const char* iata)
         if (tempName == NULL) {
             return node;
         }
-        strcpy(tempName, temp->name);
+        strncpy(tempName, temp->name, strlen(temp->name) + 1);
+        tempName[strlen(temp->name)] = '\0';
+
         char tempIata[4];
-        strcpy(tempIata, temp->iata);
+        strncpy(tempIata, temp->iata, 4);
+        tempIata[3] = '\0';
 
         node->right = deleteNode(node->right, tempIata);
 
-        // Обновляем текущий узел
         free(node->name);
         node->name = tempName;
-        strcpy(node->iata, tempIata);
+        strncpy(node->iata, tempIata, 4);
+        node->iata[3] = '\0';
     }
     if (node == NULL) {
         return NULL;
