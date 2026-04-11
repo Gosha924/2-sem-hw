@@ -11,7 +11,7 @@ void printTestResult(int testNum, const char* testName, int passed)
 void test1()
 {
     printf("\n=== ТЕСТ 1: Вставка первого узла ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
     root = insert(root, "JFK", "John F. Kennedy");
 
     int passed = (root != NULL) && (strcmp(root->iata, "JFK") == 0) && (strcmp(root->name, "John F. Kennedy") == 0) && (root->height == 1) && (root->left == NULL) && (root->right == NULL);
@@ -24,7 +24,7 @@ void test1()
 void test2()
 {
     printf("\n=== ТЕСТ 2: LL вращение ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
     root = insert(root, "SFO", "San Francisco");
     root = insert(root, "LAX", "Los Angeles");
     root = insert(root, "DEN", "Denver"); // Должно вызвать LL вращение
@@ -40,7 +40,7 @@ void test2()
 void test3()
 {
     printf("\n=== ТЕСТ 3: RR вращение ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
     root = insert(root, "DEN", "Denver");
     root = insert(root, "LAX", "Los Angeles");
     root = insert(root, "SFO", "San Francisco"); // Должно вызвать RR вращение
@@ -56,7 +56,7 @@ void test3()
 void test4()
 {
     printf("\n=== ТЕСТ 4: LR вращение ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
     root = insert(root, "SFO", "San Francisco");
     root = insert(root, "DEN", "Denver");
     root = insert(root, "LAX", "Los Angeles"); // Должно вызвать LR вращение
@@ -72,7 +72,7 @@ void test4()
 void test5()
 {
     printf("\n=== ТЕСТ 5: RL вращение ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
     root = insert(root, "DEN", "Denver");
     root = insert(root, "SFO", "San Francisco");
     root = insert(root, "LAX", "Los Angeles"); // Должно вызвать RL вращение
@@ -88,13 +88,13 @@ void test5()
 void test6()
 {
     printf("\n=== ТЕСТ 6: Поиск ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
     root = insert(root, "JFK", "New York");
     root = insert(root, "LAX", "Los Angeles");
     root = insert(root, "SFO", "San Francisco");
 
-    avlNode* found = search(root, "LAX");
-    avlNode* notFound = search(root, "ORD");
+    AvlNode* found = search(root, "LAX");
+    AvlNode* notFound = search(root, "ORD");
 
     int passed = (found != NULL) && (strcmp(found->iata, "LAX") == 0) && (notFound == NULL);
 
@@ -106,7 +106,7 @@ void test6()
 void test7()
 {
     printf("\n=== ТЕСТ 7: Удаление листа ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
     root = insert(root, "JFK", "New York");
     root = insert(root, "LAX", "Los Angeles");
     root = insert(root, "SFO", "San Francisco");
@@ -123,7 +123,7 @@ void test7()
 void test8()
 {
     printf("\n=== ТЕСТ 8: Удаление узла с двумя детьми ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
     root = insert(root, "AAA", "Los Angeles");
     root = insert(root, "DDD", "New York");
     root = insert(root, "ZZZ", "San Francisco");
@@ -138,7 +138,7 @@ void test8()
 void test9()
 {
     printf("\n=== ТЕСТ 10: Массовая вставка ===\n");
-    avlNode* root = NULL;
+    AvlNode* root = NULL;
 
     root = insert(root, "JFK", "New York");
     root = insert(root, "LAX", "Los Angeles");

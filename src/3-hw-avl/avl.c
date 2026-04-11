@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int getHeight(avlNode* node)
+int getHeight(AvlNode* node)
 {
     if (node == NULL) {
         return 0;
@@ -16,9 +16,9 @@ int max(int a, int b)
     return (a > b) ? a : b;
 }
 
-avlNode* createNewNode(const char* iata, const char* name)
+AvlNode* createNewNode(const char* iata, const char* name)
 {
-    avlNode* newNode = (avlNode*)malloc(sizeof(avlNode));
+    AvlNode* newNode = (AvlNode*)malloc(sizeof(AvlNode));
     if (newNode == NULL) {
         return NULL;
     }
@@ -38,7 +38,7 @@ avlNode* createNewNode(const char* iata, const char* name)
     return newNode;
 }
 
-void updateHeight(avlNode* node)
+void updateHeight(AvlNode* node)
 {
     if (node == NULL) {
         return;
@@ -46,7 +46,7 @@ void updateHeight(avlNode* node)
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
 }
 
-int getBalance(avlNode* node)
+int getBalance(AvlNode* node)
 {
     if (node == NULL) {
         return 0;
@@ -54,10 +54,10 @@ int getBalance(avlNode* node)
     return getHeight(node->left) - getHeight(node->right);
 }
 
-avlNode* rightRotation(avlNode* node)
+AvlNode* rightRotation(AvlNode* node)
 {
-    avlNode* newRoot = node->left;
-    avlNode* downNode = newRoot->right;
+    AvlNode* newRoot = node->left;
+    AvlNode* downNode = newRoot->right;
     newRoot->right = node;
     node->left = downNode;
     updateHeight(node);
@@ -65,10 +65,10 @@ avlNode* rightRotation(avlNode* node)
     return newRoot;
 }
 
-avlNode* leftRotation(avlNode* node)
+AvlNode* leftRotation(AvlNode* node)
 {
-    avlNode* newRoot = node->right;
-    avlNode* downNode = newRoot->left;
+    AvlNode* newRoot = node->right;
+    AvlNode* downNode = newRoot->left;
 
     newRoot->left = node;
     node->right = downNode;
@@ -78,19 +78,19 @@ avlNode* leftRotation(avlNode* node)
     return newRoot;
 }
 
-avlNode* leftRightRotation(avlNode* node)
+AvlNode* leftRightRotation(AvlNode* node)
 {
     node->left = leftRotation(node->left);
     return rightRotation(node);
 }
 
-avlNode* rightLeftRotation(avlNode* node)
+AvlNode* rightLeftRotation(AvlNode* node)
 {
     node->right = rightRotation(node->right);
     return leftRotation(node);
 }
 
-avlNode* balanceNode(avlNode* node)
+AvlNode* balanceNode(AvlNode* node)
 {
     if (node == NULL) {
         return NULL;
@@ -114,7 +114,7 @@ avlNode* balanceNode(avlNode* node)
     return node;
 }
 
-avlNode* insert(avlNode* node, const char* iata, const char* name)
+AvlNode* insert(AvlNode* node, const char* iata, const char* name)
 {
     if (node == NULL) {
         return createNewNode(iata, name);
@@ -128,7 +128,7 @@ avlNode* insert(avlNode* node, const char* iata, const char* name)
     return balanceNode(node);
 }
 
-void inOrder(avlNode* node)
+void inOrder(AvlNode* node)
 {
     if (node == NULL) {
         return;
@@ -138,7 +138,7 @@ void inOrder(avlNode* node)
     inOrder(node->right);
 }
 
-void preOrder(avlNode* node)
+void preOrder(AvlNode* node)
 {
     if (node == NULL) {
         return;
@@ -148,7 +148,7 @@ void preOrder(avlNode* node)
     preOrder(node->right);
 }
 
-void postOrder(avlNode* node)
+void postOrder(AvlNode* node)
 {
     if (node == NULL) {
         return;
@@ -158,7 +158,7 @@ void postOrder(avlNode* node)
     printf("%s %s, ", node->iata, node->name);
 }
 
-avlNode* findMin(avlNode* node)
+AvlNode* findMin(AvlNode* node)
 {
     if (node == NULL) {
         return NULL;
@@ -169,7 +169,7 @@ avlNode* findMin(avlNode* node)
     return node;
 }
 
-avlNode* deleteNode(avlNode* node, const char* iata)
+AvlNode* deleteNode(AvlNode* node, const char* iata)
 {
     if (node == NULL) {
         return NULL;
@@ -188,21 +188,21 @@ avlNode* deleteNode(avlNode* node, const char* iata)
         }
         // только правый ребенок
         if (node->left == NULL) {
-            avlNode* temp = node->right;
+            AvlNode* temp = node->right;
             free(node->name);
             free(node);
             return temp;
         }
         // только левый ребенок
         if (node->right == NULL) {
-            avlNode* temp = node->left;
+            AvlNode* temp = node->left;
             free(node->name);
             free(node);
             return temp;
         }
 
         // два ребенка
-        avlNode* temp = findMin(node->right);
+        AvlNode* temp = findMin(node->right);
         char* tempName = malloc(strlen(temp->name) + 1);
         if (tempName == NULL) {
             return node;
@@ -228,7 +228,7 @@ avlNode* deleteNode(avlNode* node, const char* iata)
     return balanceNode(node);
 }
 
-avlNode* search(avlNode* node, const char* value)
+AvlNode* search(AvlNode* node, const char* value)
 {
     if (node == NULL) {
         return NULL;
@@ -244,7 +244,7 @@ avlNode* search(avlNode* node, const char* value)
     return search(node->right, value);
 }
 
-void freeTree(avlNode* node)
+void freeTree(AvlNode* node)
 {
     if (node == NULL) {
         return;
@@ -258,7 +258,7 @@ void freeTree(avlNode* node)
     free(node);
 }
 
-int countNodes(avlNode* node)
+int countNodes(AvlNode* node)
 {
     if (node == NULL) {
         return 0;
@@ -267,7 +267,7 @@ int countNodes(avlNode* node)
 }
 
 // Проверка, что все балансы в пределах [-1, 1]
-int isBalanced(avlNode* node)
+int isBalanced(AvlNode* node)
 {
     if (node == NULL) {
         return 1;
@@ -279,7 +279,7 @@ int isBalanced(avlNode* node)
     return isBalanced(node->left) && isBalanced(node->right);
 }
 
-int isBST(avlNode* node, char* min, char* max)
+int isBST(AvlNode* node, char* min, char* max)
 {
     if (node == NULL) {
         return 1;
