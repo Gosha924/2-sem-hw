@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* distribute(int countCity, const Node** listSmew, int* capitals, int countCapitals)
+int* distribute(int countCity, const Node** listSmew, const int* capitals, int countCapitals)
 {
     int* result = (int*)malloc((countCity + 1) * sizeof(int));
     if (result == NULL) {
