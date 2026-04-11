@@ -31,7 +31,7 @@ static char** testDataCreate(int numLines, const char* lines[])
 // Освобождение тестовых данных
 static void testDataFree(char** data, int numLines)
 {
-    if (!data)
+    if (data == NULL)
         return;
     for (int i = 0; i < numLines; ++i)
         free(data[i]);
@@ -43,7 +43,7 @@ static void testDataFree(char** data, int numLines)
 void testIsNumber(void)
 {
     printf("Testing isNumber...\n");
-    double result;
+    double result = 0;
 
     // корректные числа
     assert(isNumber("123", &result) == true && result == 123.0);
@@ -163,7 +163,7 @@ void testIntegration(void)
 {
     printf("Integration test...\n");
 
-    FILE* test_input = fopen("test_input.csv", "w");
+    FILE* test_input = fopen("testInput.csv", "w");
     assert(test_input != NULL);
     fprintf(test_input, "Name,Age,Salary,City\n");
     fprintf(test_input, "Gosha,25,55555,New York\n");
@@ -171,7 +171,7 @@ void testIntegration(void)
     fprintf(test_input, "Lev,35,22222,Paris\n");
     fclose(test_input);
 
-    FILE* file = fopen("test_input.csv", "r");
+    FILE* file = fopen("testInput.csv", "r");
     assert(file != NULL);
 
     char** data = malloc(10 * sizeof(char*));
@@ -205,7 +205,7 @@ void testIntegration(void)
     for (int i = 0; i < linesRead; ++i)
         free(data[i]);
     free(data);
-    remove("test_input.csv");
+    remove("testInput.csv");
     printf("OK\n\n");
 }
 

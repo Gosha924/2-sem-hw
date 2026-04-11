@@ -91,6 +91,10 @@ char** splitLine(char* line, int numCols)
     while (token != NULL && col < numCols) {
         words[col] = malloc(strlen(token) + 1);
         if (words[col] == NULL) {
+            for (int i = 0; i < col; i++) {
+                free(words[i]);
+            }
+            free(words);
             return NULL;
         }
         strncpy(words[col], token, strlen(token) + 1);
