@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void saveNodeInFile(FILE* file, avlNode* node)
+void saveNodeInFile(FILE* file, AvlNode* node)
 {
     if (node == NULL) {
         return;
@@ -12,7 +12,7 @@ void saveNodeInFile(FILE* file, avlNode* node)
     saveNodeInFile(file, node->right);
 }
 
-int saveTreeInFile(char* filename, avlNode* root)
+int saveTreeInFile(char* filename, AvlNode* root)
 {
     FILE* file = fopen(filename, "w");
     if (file == NULL) {
@@ -37,7 +37,7 @@ int main(int arg, char* argv[])
         return 1;
     }
 
-    avlNode* tree = NULL;
+    AvlNode* tree = NULL;
     char line[200];
     int lineNum = 0;
     while (fgets(line, sizeof(line), file)) {
@@ -65,7 +65,7 @@ int main(int arg, char* argv[])
             memmove(iata, iata + 1, strlen(iata));
         }
         if (strcmp(command, "find") == 0) {
-            avlNode* needNode = search(tree, iata);
+            AvlNode* needNode = search(tree, iata);
             if (needNode) {
                 printf("%s -> %s\n", needNode->iata, needNode->name);
             } else {
