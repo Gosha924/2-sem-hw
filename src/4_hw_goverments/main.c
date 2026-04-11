@@ -33,7 +33,7 @@ int* distribute(int countCity, const Node** listSmew, int* capitals, int countCa
         if (result[city] == -1) {
             result[city] = goverment;
         }
-        for (Node* current = listSmew[city]; current; current = current->next) {
+        for (const Node* current = listSmew[city]; current; current = current->next) {
             int numberNeidorCity = current->numberNeidorCity;
             int newDist = dist + current->lenRoad;
             if (result[numberNeidorCity] == -1) {
@@ -100,7 +100,7 @@ int main(int arg, char* argv[])
 
     int* capitals = (int*)malloc(countCapitals * sizeof(int));
     if (capitals == NULL) {
-        printf("Error: cannot allocate memory for capitals\n");
+        printf("Error: cannot allocate memory\n");
         freeGragh(listSmew, countCity);
         fclose(file);
         return 1;
