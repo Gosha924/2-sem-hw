@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* distribute(int countCity, const Node** listSmev, int* capitals, int countCapitals)
+int* distribute(int countCity, const Node** listSmew, int* capitals, int countCapitals)
 {
     int* result = (int*)malloc((countCity + 1) * sizeof(int));
     if (result == NULL) {
@@ -33,7 +33,7 @@ int* distribute(int countCity, const Node** listSmev, int* capitals, int countCa
         if (result[city] == -1) {
             result[city] = goverment;
         }
-        for (Node* current = listSmev[city]; current; current = current->next) {
+        for (Node* current = listSmew[city]; current; current = current->next) {
             int numberNeidorCity = current->numberNeidorCity;
             int newDist = dist + current->lenRoad;
             if (result[numberNeidorCity] == -1) {

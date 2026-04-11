@@ -31,8 +31,14 @@ void heapUp(Heap* heap, int idx)
 void heapPush(Heap* heap, int dist, int city, int state)
 {
     if (heap->size == heap->capacity) {
-        heap->capacity *= 2;
-        heap->data = (QueueNode*)realloc(heap->data, heap->capacity * sizeof(QueueNode));
+        size_t newCapacity = heap->capacity * 2;
+        // Используем временную переменную, чтобы избежать утечки при ошибке realloc
+        QueueNode* newData = (QueueNode*)realloc(heap->data, newCapacity * sizeof(QueueNode));
+        if (newData == NULL) {
+            return;
+        }
+        heap->data = newData;
+        heap->capacity = newCapacity;
     }
     int idx = heap->size++;
     heap->data[idx].distForCapital = dist;
