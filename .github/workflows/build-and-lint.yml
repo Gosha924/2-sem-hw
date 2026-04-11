@@ -23,4 +23,6 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y clang-tidy-18
 
       - name: Run clang-tidy
-        run: run-clang-tidy-18 -p build -header-filter='.*' -warnings-as-errors='*'
+  run: |
+    find . -path ./build -prune -o -type f \( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \) -print | \
+      xargs clang-tidy-18 --extra-arg=-std=c11 --extra-arg=-I. --warnings-as-errors='*'
