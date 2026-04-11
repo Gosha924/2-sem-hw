@@ -22,8 +22,5 @@ jobs:
       - name: Install clang-tidy
         run: sudo apt-get update && sudo apt-get install -y clang-tidy-18
 
-      - name: Configure CMake (generate compile_commands.json)
-        run: cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-
       - name: Run clang-tidy
         run: run-clang-tidy-18 -p build -header-filter='.*' -warnings-as-errors='*'
