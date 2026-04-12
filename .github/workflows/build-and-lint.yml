@@ -11,10 +11,25 @@ on:
 jobs:
   build-and-lint:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v5
-      
+
+      - name: Install clang tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format-18 clang-tidy-18
+
       - name: Check format
         run: |
-          find . -path ./build -prune -o -type f -name '*.[ch]' -print | xargs clang-format-18 --style=file --dry-run -Werror
+          find . -path ./build -prune -o -type f -name '*.[ch]' -print | \
+            xargs clang-format-18 --style=file --dry-run -Werror
+
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+      - name: Build
+        run: cmake --build build
+        
+      - name: Run clang-tidy
+        run: run-clang-tidy-18 -p build -header-filter='.*' -warnings-as-errors='*'
